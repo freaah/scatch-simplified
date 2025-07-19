@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scatch - Простые покупки</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo-wrapper">
+            <img src="./img/logo.png" alt="Лого" class="logo-img">
+            <div class="logo">Scatch</div>
+        </div>
+        <div class="logo"></div>
+        <div class="cart-icon" onclick="showCart()">
+            🛒
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Добро пожаловать в ScatchStore</h1>
+    <p>Качественные товары по приятным ценам</p>
+</section>
+
+<section class="products" id="products">
+    <h2>Популярные товары</h2>
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image">📱</div>
+            <div class="product-info">
+                <h3 class="product-title">Смартфон Pro</h3>
+                <p class="product-price">₽29,999</p>
+                <button class="add-to-cart" onclick="addToCart('Смартфон Pro', 29999)">Добавить в корзину</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">💻</div>
+            <div class="product-info">
+                <h3 class="product-title">Ноутбук Air</h3>
+                <p class="product-price">₽59,999</p>
+                <button class="add-to-cart" onclick="addToCart('Ноутбук Air', 59999)">Добавить в корзину</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">🎧</div>
+            <div class="product-info">
+                <h3 class="product-title">Наушники Max</h3>
+                <p class="product-price">₽7,999</p>
+                <button class="add-to-cart" onclick="addToCart('Беспроводные наушники', 7999)">Добавить в корзину</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image">⌚</div>
+            <div class="product-info">
+                <h3 class="product-title">Умные часы Watch</h3>
+                <p class="product-price">₽12,999</p>
+                <button class="add-to-cart" onclick="addToCart('Умные часы', 12999)">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Scatch-Store. Все права защищены.</p>
+</footer>
+
+<!-- Простой JS (можно оставить в HTML или вынести в app.js) -->
+<script>
+    let cartCount = 0;
+    let cartItems = [];
+
+    function addToCart(productName, price) {
+        cartCount++;
+        cartItems.push({name: productName, price: price});
+        document.getElementById('cartCount').textContent = cartCount;
+
+        const button = event.target;
+        button.textContent = '✓ Добавлено';
+        button.style.background = '#4caf50';
+
+        setTimeout(() => {
+            button.textContent = 'Добавить в корзину';
+            button.style.background = '#667eea';
+        }, 1500);
+    }
+
+    function showCart() {
+        if (cartCount === 0) {
+            alert('Корзина пуста');
+            return;
+        }
+        const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+        const itemsList = cartItems.map(item => `${item.name} - ₽${item.price.toLocaleString()}`).join('\n');
+        alert(`Ваша корзина:\n\n${itemsList}\n\nИтого: ₽${total.toLocaleString()}`);
+    }
+</script>
+</body>
+</html>
